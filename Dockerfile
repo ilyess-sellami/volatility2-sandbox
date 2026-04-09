@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     ca-certificates \
     m4 \
+    libjansson-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python packages
