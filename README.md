@@ -33,6 +33,8 @@ docker build -t volatility2-sandbox .
 ### 3. Run Volatility
 
 ```bash
+chmod +x vol2.sh
+
 ./vol2.sh <memorydump_full_path> <plugin> [additional options]
 
 # Example: ./vol2.sh ~/Downloads/memdump.raw pslist --profile=Win7SP1x64
