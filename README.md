@@ -24,5 +24,6 @@ A lightweight, portable, and reproducible Docker sandbox for Volatility 2, desig
 
 ``bash
     ./vol2.sh <memorydump_full_path> <plugin> [additional options]
+    
     # Example: ./vol2.sh ~/Downloads/memdump.raw pslist --profile=Win7SP1x64
 ``
