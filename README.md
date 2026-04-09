@@ -2,7 +2,13 @@
   <img src="docs/logo.png" alt="Volatility 2 Sandbox Logo" width="350"/>
 </p>
 
-A lightweight, portable, and reproducible Docker sandbox for [Volatility 2](https://github.com/volatilityfoundation/volatility), designed for memory forensics, DFIR investigations, and hands-on practice labs.
+<p align="center">
+  <strong>
+    A lightweight, portable, and reproducible Docker sandbox for 
+    <a href="https://github.com/volatilityfoundation/volatility">Volatility 2</a>, 
+    designed for memory forensics, DFIR investigations, and hands-on practice labs.
+  </strong>
+</p>
 
 ## Requirements
 
