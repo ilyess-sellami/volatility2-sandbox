@@ -14,7 +14,7 @@
 
 - [Docker](https://www.docker.com) installed on your system.
 
-## Setup
+## Installation & Setup
 
 ### 1. Clone the repository
 
