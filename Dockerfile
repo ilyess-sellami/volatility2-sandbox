@@ -1,4 +1,4 @@
-FROM python:2.7-slim
+FROM python:2.7-buster
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LD_LIBRARY_PATH=/usr/local/lib
