@@ -19,7 +19,7 @@
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/volatility2-sandbox.git 
+git clone https://github.com/ilyess-sellami/volatility2-sandbox.git 
 
 cd volatility2-sandbox
 ```
