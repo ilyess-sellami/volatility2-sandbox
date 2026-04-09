@@ -1,8 +1,5 @@
 <p align="center">
   <img src="docs/logo.png" alt="Volatility 2 Sandbox Logo" width="350"/>
-</p>
-
-<p align="center">
   <strong>
     A lightweight, portable, and reproducible Docker sandbox for 
     <a href="https://github.com/volatilityfoundation/volatility">Volatility 2</a>, 
