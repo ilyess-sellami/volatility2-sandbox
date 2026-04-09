@@ -1,4 +1,4 @@
-# Dockerfile for volatility2-sandbox
+$# Dockerfile for volatility2-sandbox
 FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND=noninteractive
