@@ -3,7 +3,7 @@ FROM python:2.7-slim
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LD_LIBRARY_PATH=/usr/local/lib
 
-# Use archived Debian repositories for old packages
+# Use archived Debian repositories
 RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list && \
     sed -i '/security.debian.org/d' /etc/apt/sources.list && \
     echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until
@@ -25,9 +25,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install Python packages
 RUN pip install --upgrade pip && pip install distorm3 pycrypto pillow
 
-# Build Yara from source (ensure libyara.so exists)
-RUN git clone --branch 4.3.0 https://github.com/VirusTotal/yara.git /tmp/yara && \
+# Build Yara from source
+RUN git clone https://github.com/VirusTotal/yara.git /tmp/yara && \
     cd /tmp/yara && \
+    git checkout tags/v4.3.0 && \
     ./bootstrap.sh && \
     ./configure --enable-cuckoo --enable-magic && \
     make && make install && make clean && \
