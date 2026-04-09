@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/logo.png" alt="Volatility 2 Sandbox Logo" width="350"/>
+  <img src="docs/logo-2.png" alt="Volatility 2 Sandbox Logo" width="350"/>
 </p>
 
 <p align="center">
