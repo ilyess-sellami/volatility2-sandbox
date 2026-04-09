@@ -1,33 +1,41 @@
 FROM python:2.7-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/usr/local/lib
+ENV LD_LIBRARY_PATH=/usr/local/lib
 
-# Use archived Debian repositories (for old Python 2 packages)
+# Use archived Debian repositories for old packages
 RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list && \
     sed -i '/security.debian.org/d' /etc/apt/sources.list && \
     echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until
 
-# Install required system packages
+# Install build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     build-essential \
+    automake \
+    libtool \
+    pkg-config \
+    libssl-dev \
+    python-dev \
     libdistorm3-dev \
-    yara \
+    curl \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python packages required by Volatility 2
-RUN pip install --upgrade pip && \
-    pip install distorm3 yara pycrypto pillow
+# Install Python packages
+RUN pip install --upgrade pip && pip install distorm3 pycrypto pillow
 
-# Fix shared library cache so libyara.so is found
-RUN ldconfig
+# Build Yara from source (ensure libyara.so exists)
+RUN git clone --branch 4.3.0 https://github.com/VirusTotal/yara.git /tmp/yara && \
+    cd /tmp/yara && \
+    ./bootstrap.sh && \
+    ./configure --enable-cuckoo --enable-magic && \
+    make && make install && make clean && \
+    ldconfig && \
+    rm -rf /tmp/yara
 
-# Clone Volatility 2 repository
+# Clone Volatility 2
 RUN git clone https://github.com/volatilityfoundation/volatility.git /opt/volatility
 
-# Set working directory
 WORKDIR /opt/volatility
-
-# Default entrypoint
 ENTRYPOINT ["python", "vol.py"]
