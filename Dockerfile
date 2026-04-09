@@ -1,40 +1,25 @@
-# ------------------------------
-# Volatility 2 Sandbox Dockerfile
-# ------------------------------
-FROM ubuntu:22.04
+# Updated lightweight Dockerfile for Volatility 2
+FROM python:2.7-slim
 
-# Set noninteractive mode to avoid prompts
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install basic dependencies and Python 2 from deadsnakes
-RUN apt-get update && \
-    apt-get install -y software-properties-common curl && \
-    add-apt-repository ppa:deadsnakes/ppa && \
-    apt-get update && \
-    apt-get install -y \
-        python2 \
-        python2-dev \
-        python2-minimal \
-        python-pip \
-        git \
-        build-essential \
-        libdistorm3-dev \
-        yara \
-        && rm -rf /var/lib/apt/lists/*
+# Install only required system packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    build-essential \
+    libdistorm3-dev \
+    yara \
+    && rm -rf /var/lib/apt/lists/*
 
-# Set python2 as default python
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python2 1
+# Upgrade pip and install Python packages for Volatility 2
+RUN pip install --upgrade pip && \
+    pip install distorm3 yara pycrypto pillow
 
-# Clone Volatility 2 repository
+# Clone Volatility 2 into /opt/volatility
 RUN git clone https://github.com/volatilityfoundation/volatility.git /opt/volatility
 
+# Set working directory
 WORKDIR /opt/volatility
 
-# Install Volatility requirements
-RUN pip install --upgrade pip && pip install -r requirements.txt
-
-# Use JSON form ENTRYPOINT to avoid OS signal issues
+# Set default entrypoint
 ENTRYPOINT ["python", "vol.py"]
-
-# Default command (just print help)
-CMD ["--info"]
