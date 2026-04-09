@@ -1,4 +1,4 @@
-$# Dockerfile for volatility2-sandbox
+# Dockerfile for volatility2-sandbox
 FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -25,4 +25,4 @@ RUN git clone https://github.com/volatilityfoundation/volatility.git
 WORKDIR /opt/volatility
 
 # Set default entrypoint
-ENTRYPOINT ["python2", "vol.py"]
+ENTRYPOINT ["python2", "vol.py"]fix 
