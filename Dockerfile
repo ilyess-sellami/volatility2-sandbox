@@ -25,12 +25,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python packages
-RUN pip install --upgrade pip && pip install distorm3 pycrypto pillow
+RUN pip install --upgrade pip && pip install distorm3 pycrypto pillow yara-python
 
-# Build Yara 3.8.1 from source
+# Build latest stable Yara (v4.5.1) from source
 RUN git clone https://github.com/VirusTotal/yara.git /tmp/yara && \
     cd /tmp/yara && \
-    git checkout tags/v3.8.1 && \
+    git checkout tags/v4.5.1 && \
     ./bootstrap.sh && \
     ./configure --enable-cuckoo --enable-magic && \
     make && make install && make clean && \
